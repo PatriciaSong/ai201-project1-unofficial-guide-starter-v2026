@@ -21,26 +21,14 @@
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
-
-     Milestone 5. -->
+I picked the `city_guides` corpus. It contains long, sectioned travel guides for towns and regions, with information organized under headings such as “Getting there,” “Where to eat,” and “When to go.” This system answers questions about travel advice, transport, accessibility, timing, and local recommendations by retrieving the most relevant guide sections and summarizing them.
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Chunk size:** 256 characters
+**Overlap:** 100 characters
 
-<!-- What about YOUR documents made you pick these numbers? Short posts and
-     long sectioned guides don't want the same chunking, and "800 seemed
-     reasonable" earns nothing. Point at something you noticed when you read
-     the documents in Milestone 1.
-
-     If you changed your mind partway through, say so and say why. That's worth
-     more than pretending you got it right first time.
-
-     Milestone 3. -->
+The `city_guides` documents are structured as short headings followed by paragraph-sized explanations rather than one long block of text. A large fixed-size window would often split a heading away from the paragraph that explains it, which makes the retrieved chunk less useful. I therefore chunked paragraph by paragraph and kept a small overlap so related information at a section boundary stays connected while the chunk still remains compact.
 
 ## Sample Chunks
 
@@ -53,29 +41,34 @@
 
      Milestone 3. -->
 
-**Chunk 1** — source: `` — produced by: ``
+**Chunk 1** — source: `guide_accessibility.md` — produced by: `chunker.py::hierarchical_split`
 
 ```
+# Getting around the region with limited mobility
 ```
 
-**Chunk 2** — source: `` — produced by: ``
+**Chunk 2** — source: `guide_accessibility.md` — produced by: `chunker.py::hierarchical_split`
 
 ```
+An honest assessment rather than a promotional one. Some of these places are
 ```
 
-**Chunk 3** — source: `` — produced by: ``
+**Chunk 3** — source: `guide_accessibility.md` — produced by: `chunker.py::hierarchical_split`
 
 ```
+difficult and it is better to know in advance.
 ```
 
-**Chunk 4** — source: `` — produced by: ``
+**Chunk 4** — source: `guide_accessibility.md` — produced by: `chunker.py::hierarchical_split`
 
 ```
+## Straightforward
 ```
 
-**Chunk 5** — source: `` — produced by: ``
+**Chunk 5** — source: `guide_accessibility.md` — produced by: `chunker.py::hierarchical_split`
 
 ```
+**Thornby Wells** is the easiest town in the region. It is flat, compact, and
 ```
 
 ## Sample Answer

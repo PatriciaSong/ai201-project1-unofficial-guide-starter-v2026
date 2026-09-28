@@ -16,6 +16,7 @@ layer. The gate catches the clear misses; the prompt catches the near ones.
 """
 
 from dataclasses import dataclass
+from typing import Optional
 
 import config
 from store import Result
@@ -42,7 +43,7 @@ class GateDecision:
         )
 
 
-def check(results: list[Result], threshold: float | None = None) -> GateDecision:
+def check(results: list[Result], threshold: Optional[float] = None) -> GateDecision:
     """
     Decide whether the retrieved chunks are close enough to answer from.
 

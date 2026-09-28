@@ -33,6 +33,7 @@ import json
 import os
 import sys
 import time
+from typing import Optional
 
 import config
 
@@ -52,12 +53,12 @@ class QuotaGuard(Exception):
 # ─── Cache ───────────────────────────────────────────────────────────────────
 
 
-def _cache_key(prompt: str, system: str | None) -> str:
+def _cache_key(prompt: str, system: Optional[str]) -> str:
     blob = json.dumps([config.MODEL, system or "", prompt], sort_keys=True)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:32]
 
 
-def _cache_read(key: str) -> str | None:
+def _cache_read(key: str) -> Optional[str]:
     path = config.CACHE_DIR / f"{key}.json"
     if not path.exists():
         return None
@@ -199,7 +200,7 @@ def _get_client():
     return _client
 
 
-def generate(prompt: str, system: str | None = None, cache: bool = True) -> str:
+def generate(prompt: str, system: Optional[str] = None, cache: bool = True) -> str:
     """
     Send a prompt and get text back.
 
@@ -226,7 +227,7 @@ def generate(prompt: str, system: str | None = None, cache: bool = True) -> str:
 
     _check_budget()
 
-    last_error: Exception | None = None
+    last_error: Optional[Exception] = None
     for attempt in range(config.MAX_RETRIES):
         _wait_for_slot()
         try:

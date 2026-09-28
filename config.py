@@ -9,6 +9,7 @@ Anything you set in your .env file wins over the defaults here.
 
 import os
 from pathlib import Path
+from typing import Optional
 
 from dotenv import load_dotenv
 
@@ -80,12 +81,12 @@ CHROMA_DIR = ROOT / "chroma_db"
 RESULTS_DIR = ROOT / "results"
 
 
-def corpus_path(name: str | None = None) -> Path:
+def corpus_path(name: Optional[str] = None) -> Path:
     """Folder holding the documents for a corpus."""
     return CORPORA_DIR / (name or CORPUS) / "documents"
 
 
-def collection_name(name: str | None = None, variant: str = "default") -> str:
+def collection_name(name: Optional[str] = None, variant: str = "default") -> str:
     """
     Name of the vector-store collection for a corpus.
 

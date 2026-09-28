@@ -20,6 +20,7 @@ rest of the project if they were wrong:
 import os
 import shutil
 from dataclasses import dataclass
+from typing import Optional
 
 # Must be set BEFORE chromadb is imported. Without it, some Chroma versions
 # print "Failed to send telemetry event ..." on every single call — which looks
@@ -136,7 +137,7 @@ def _client():
 
 def build_index(
     chunks: list[Chunk],
-    corpus: str | None = None,
+    corpus: Optional[str] = None,
     variant: str = "default",
 ) -> int:
     """
@@ -180,8 +181,8 @@ def build_index(
 
 def search(
     question: str,
-    top_k: int | None = None,
-    corpus: str | None = None,
+    top_k: Optional[int] = None,
+    corpus: Optional[str] = None,
     variant: str = "default",
 ) -> list[Result]:
     """
@@ -220,7 +221,7 @@ def search(
     return results
 
 
-def index_exists(corpus: str | None = None, variant: str = "default") -> bool:
+def index_exists(corpus: Optional[str] = None, variant: str = "default") -> bool:
     """Is there an index here to search, without searching it?
 
     `serve.py`'s health check asks this. It deliberately does not embed

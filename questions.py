@@ -23,9 +23,9 @@ names a target of "4 of 5", and four of three is not a thing.
 
 QUESTIONS = [
     # {"question": "...", "expects": "..."},
-    {"question": "", "expects": ""},
-    {"question": "", "expects": ""},
-    {"question": "", "expects": ""},
+    {"question": "when is the dropping window", "expects": "through the end of week six"},
+    {"question": "what is the graduation requirements credit hours", "expects": "120 credit hours"},
+    {"question": "when does the application for study aboard opens", "expects": "Applications open in October."},
     {"question": "", "expects": ""},
     {"question": "", "expects": ""},
 ]
